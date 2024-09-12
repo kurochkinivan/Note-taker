@@ -12,11 +12,20 @@ http :
 app_config :
   log_level : trace
 
+# Locally:
 postgresql :
   psql_username : root
   psql_password : 12345
-  psql_host : postgresql
+  psql_host : localhost
   psql_port : 5432
   psql_database : note_taker
+
+# Docker:
+# postgresql :
+#   psql_username : root
+#   psql_password : 12345
+#   psql_host : postgresql
+#   psql_port : 5432
+#   psql_database : note_taker
 
 ---

@@ -6,4 +6,12 @@ rm:
 
 up: 
 	docker build -t nt-backend:local . \
-	&& docker-compose -f docker-compose.yaml up --force-recreate
+	&& docker-compose -f docker-compose.yaml up --detach --force-recreate
+
+up-db:
+	docker-compose up -d postgresql
+
+rm-db:
+	docker-compose stop \
+	&& docker-compose rm \
+	&& sudo rm -rf data/ 
