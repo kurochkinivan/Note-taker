@@ -1,0 +1,1 @@
+INSERT INTO users VALUES ('anatoly', 21);

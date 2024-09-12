@@ -1,0 +1,22 @@
+---
+
+is_debug : true
+is_dev : false
+
+http : 
+  ip : 0.0.0.0
+  port : 8000
+  read_timeout : 5s
+  write_timeout : 10s
+
+app_config :
+  log_level : trace
+
+postgresql :
+  psql_username : root
+  psql_password : 12345
+  psql_host : postgresql
+  psql_port : 5432
+  psql_database : note_taker
+
+---

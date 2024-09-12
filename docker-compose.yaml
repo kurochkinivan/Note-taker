@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  app:
+    container_name: nt-backend
+    image: nt-backend:local
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgresql
+    networks:
+      - nt
+  
+  postgresql:
+    container_name: nt-db
+    image: postgres:16.2-alpine
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=12345
+      - POSTGRES_DB=note_taker
+    volumes:
+      - ./data:/var/lib/postgresql/data
+      - ./db_init/init_tables.sql:/docker-entrypoint-initdb.d/001.sql
+      - ./db_init/init_data.sql:/docker-entrypoint-initdb.d/002.sql
+    networks:
+      - nt
+
+networks:
+  nt:
