@@ -40,7 +40,7 @@ var pathToConfigDocker = "config.yaml"
 func GetConfig() *Config {
 	once.Do(func() {
 		instance = &Config{}
-		if err := cleanenv.ReadConfig(pathToConfigDocker, instance); err != nil {
+		if err := cleanenv.ReadConfig(pathToConfig, instance); err != nil {
 			helpText := "failed to read config"
 			errText, _ := cleanenv.GetDescription(instance, &helpText)
 			logrus.Error(errText)

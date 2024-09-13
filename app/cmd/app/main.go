@@ -3,13 +3,12 @@ package main
 import (
 	"context"
 	"fmt"
-	"net/http"
 	"os"
 	"path"
 	"runtime"
 
-	"github.com/kurochkinivan/Note_taker/internal/config"
-	"github.com/kurochkinivan/Note_taker/pkg/postgresql"
+	"github.com/kurochkinivan/Note-taker/internal/app"
+	"github.com/kurochkinivan/Note-taker/internal/config"
 	"github.com/sirupsen/logrus"
 )
 
@@ -31,17 +30,16 @@ func init() {
 }
 
 func main() {
+	logrus.Info("getting config")
 	cfg := config.GetConfig()
 
-	cfgPSQL := cfg.PostgreSQL
-	pgcfg := postgresql.NewPgConfig(cfgPSQL.Username, cfgPSQL.Password, cfgPSQL.Host, cfgPSQL.Port, cfgPSQL.Database)
-
-	client, err := postgresql.NewClient(context.TODO(), 5, pgcfg)
+	app, err := app.NewApp(cfg)
 	if err != nil {
-		panic(err)
+		logrus.Fatalf("failed to start app, err: %v", err)
 	}
 
-	fmt.Println(client)
-
-	logrus.Fatal(http.ListenAndServe("0.0.0.0:8000", nil))
+	err = app.Run(context.Background())
+	if err != nil {
+		logrus.Fatalf("server trouble, err: %v", err)
+	}
 }
