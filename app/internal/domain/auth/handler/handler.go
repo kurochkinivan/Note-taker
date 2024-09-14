@@ -9,6 +9,7 @@ import (
 	"github.com/kurochkinivan/Note-taker/internal/domain/auth/model"
 	"github.com/kurochkinivan/Note-taker/internal/domain/auth/repository"
 	"github.com/kurochkinivan/Note-taker/internal/domain/handlers"
+	"github.com/kurochkinivan/Note-taker/internal/middleware"
 )
 
 type handler struct {
@@ -22,7 +23,7 @@ func NewAuthHandler(repository repository.Repository) handlers.Handler {
 }
 
 func (h *handler) Register(mux *http.ServeMux) {
-	mux.HandleFunc(http.MethodGet+" /auth/sign-in", apperror.MiddleWare(h.signIn))
+	mux.HandleFunc(http.MethodPost+" /auth/sign-in", middleware.ErrorMiddleware(h.signIn))
 }
 
 func (h *handler) signIn(w http.ResponseWriter, r *http.Request) error {
@@ -30,7 +31,6 @@ func (h *handler) signIn(w http.ResponseWriter, r *http.Request) error {
 
 	data, err := io.ReadAll(r.Body)
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
 		return apperror.ErrValidateData
 	}
 	defer r.Body.Close()

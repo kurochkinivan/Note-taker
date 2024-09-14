@@ -26,7 +26,7 @@ func (e *AppError) Marshal() []byte {
 	return marshal
 }
 
-func systemError(err error) *AppError {
+func SystemError(err error) *AppError {
 	return NewAppErr(err, "internal system error", err.Error(), "US-000")
 }
 

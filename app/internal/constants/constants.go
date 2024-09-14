@@ -5,7 +5,7 @@ import "time"
 // hash and jwt token
 const (
 	Salt       = "dkwf;ljewpop0f9s9pfjio2=[a]ca[fkaw]"
-	Signingkey = "w0d@#a0wdWDAPWD;aw;@wa@!"
+	Signingkey = "w0d@#a0wdWDAPWD;aw;@wa@!-3120-amwkdlkn12kn31"
 	TokenTTL   = 12 * time.Hour
 )
 

@@ -10,6 +10,8 @@ import (
 	"github.com/kurochkinivan/Note-taker/internal/config"
 	authHandler "github.com/kurochkinivan/Note-taker/internal/domain/auth/handler"
 	authRepository "github.com/kurochkinivan/Note-taker/internal/domain/auth/repository"
+	notesHandler "github.com/kurochkinivan/Note-taker/internal/domain/notes/handler"
+	notesRepository "github.com/kurochkinivan/Note-taker/internal/domain/notes/repository"
 	"github.com/kurochkinivan/Note-taker/pkg/postgresql"
 	"github.com/sirupsen/logrus"
 	"golang.org/x/sync/errgroup"
@@ -44,6 +46,10 @@ func NewApp(cfg *config.Config) (*App, error) {
 	authRepository := authRepository.NewAuthRepository(client)
 	authHandler := authHandler.NewAuthHandler(authRepository)
 	authHandler.Register(mux)
+
+	notesRepository := notesRepository.NewNotesRepository(client)
+	notesHandler := notesHandler.NewNotesRepository(notesRepository)
+	notesHandler.Register(mux)
 
 	return &App{
 		cfg: cfg,
