@@ -52,6 +52,6 @@ curl -X POST [::1]:8000/notes/create \
 
 ## Структура базы данных
 
-База данных содержит две сущности: users и notes.
+База данных содержит две сущности: **users** и **notes**.
 
 ![erd for database](readme/erd.png)
