@@ -2,10 +2,17 @@
 
 ## Запуск проекта
 
-Необходимо перейти в корневую директорию проекта, оттуда будут доступны две команды:
+Скопировать проект:
+```bash
+git clone https://github.com/kurochkinivan/Note-taker
+cd Note-taker
+```
+
+В корневой директории проекта доступны две команды:
 ```bash
     ## Создать образ go-приложения, инициализировать БД с данными
     ## и go-приложение в одном контейнере (docker-compose).
+    ## Может в первый раз выдать ошибку, необходимо перезапустить.
     make up
 
     ## Уничтожить контейнер, а также образ go-приложения.
@@ -18,15 +25,13 @@
 ```bash 
 curl -X POST [::1]:8000/auth/sign-in \
     -H "Content-Type: application/json" \
-    -d '{"login":"vanya", "password":"12345"}' \
-    -w "\n"
+    -d '{"login":"vanya", "password":"12345"}' 
 ```
 
 Получение всех заметок, принадлежащих пользователю (**YOUR_TOKEN** заменить на выданный jwt-токен):
 ```bash
 curl -X GET [::1]:8000/notes/all \
-    -H "Authorization: Bearer YOUR_TOKEN" \
-    -w "\n"
+    -H "Authorization: Bearer YOUR_TOKEN" 
 ```
 
 Добавление заметки (**YOUR_TOKEN** заменить на выданный jwt-токен):
@@ -34,8 +39,7 @@ curl -X GET [::1]:8000/notes/all \
 curl -X POST [::1]:8000/notes/create \
     -H "Authorization: Bearer YOUR_TOKEN" \
     -H "Content-Type: application/json" \
-    -d '{"title":"Моя первая заметка", "body":"Я ни умею песать па русски"}' \
-    -w "\n"
+    -d '{"title":"Моя первая заметка", "body":"Я ни умею песать па русски"}' 
 ```
 
 ## Использованные сторонние библиотеки
