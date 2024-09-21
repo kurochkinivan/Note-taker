@@ -38,7 +38,7 @@ func MakeRequst(text string) ([]yandexSpellerAPIReponse, error) {
 
 	resp, err := client.Do(req)
 	if err != nil {
-		logrus.Fatal(err)
+		return nil, fmt.Errorf("failed to do request, err: %v", err)
 	}
 	defer resp.Body.Close()
 
